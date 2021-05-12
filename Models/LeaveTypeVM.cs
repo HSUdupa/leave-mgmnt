@@ -10,15 +10,13 @@ namespace leave_mgmnt.Models
     {
        
         public int Id { get; set; }
-        public string Name { get; set; }
-        public DateTime DateCreated { get; set; }
-    }
-
-    public class createLeaveTypeVM
-    {
 
         [Required]
         public string Name { get; set; }
-        
+
+        [Display (Name ="Created Date")]
+        public DateTime? DateCreated { get; set; }
     }
+
+    
 }
