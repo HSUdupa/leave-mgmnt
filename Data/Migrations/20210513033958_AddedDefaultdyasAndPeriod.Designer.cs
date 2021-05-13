@@ -10,14 +10,14 @@ using leave_mgmnt.Data;
 namespace leave_mgmnt.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210510155750_AddedLeaveDetailsTables")]
-    partial class AddedLeaveDetailsTables
+    [Migration("20210513033958_AddedDefaultdyasAndPeriod")]
+    partial class AddedDefaultdyasAndPeriod
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.8")
+                .HasAnnotation("ProductVersion", "3.1.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -246,6 +246,9 @@ namespace leave_mgmnt.Data.Migrations
                     b.Property<int>("NumberOfDays")
                         .HasColumnType("int");
 
+                    b.Property<int>("Period")
+                        .HasColumnType("int");
+
                     b.Property<int>("leaveId")
                         .HasColumnType("int");
 
@@ -310,6 +313,9 @@ namespace leave_mgmnt.Data.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DefaultDays")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -317,6 +323,25 @@ namespace leave_mgmnt.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("LeaveTypes");
+                });
+
+            modelBuilder.Entity("leave_mgmnt.Models.LeaveTypeVM", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LeaveTypeVM");
                 });
 
             modelBuilder.Entity("leave_mgmnt.Data.Employee", b =>
