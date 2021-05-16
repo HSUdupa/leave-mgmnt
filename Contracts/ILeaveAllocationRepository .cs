@@ -10,5 +10,7 @@ namespace leave_mgmnt.Contracts
     {
         bool isLeaveExiss(int LeavetypeId, string empId);
         ICollection<LeaveAllocation> getLeaveAllocationDetail(string id);
+        LeaveAllocation getLeaveAllocationDetailonLeaveTypeId(string employeeId,int leaveTypeId);
+
     }
 }

@@ -36,7 +36,7 @@ namespace leave_mgmnt
 
             //Add referece for repo and contract in startup file.
             services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
-            services.AddScoped<ILeaveHistoryRepository, LeaveHistorysRepository>();
+            services.AddScoped<ILeaveRequestRepository, LeaveRequestRepository>();
             services.AddScoped<ILeaveAllocationRepository, LeaveAllocationRepository>();
 
             services.AddAutoMapper(typeof(Mapping));

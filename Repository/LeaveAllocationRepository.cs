@@ -41,8 +41,15 @@ namespace leave_mgmnt.Repository
 
         public ICollection<LeaveAllocation> getLeaveAllocationDetail(string id)
         {
-            var period = DateTime.Now.Year;
+             var period = DateTime.Now.Year;
              var rtnData=fndAll().Where(q => q.EmployeeId == id && q.Period==period).ToList();
+            return rtnData;
+        }
+
+        public LeaveAllocation getLeaveAllocationDetailonLeaveTypeId(string employeeId, int leaveTypeId)
+        {
+            var period = DateTime.Now.Year;
+            var rtnData = fndAll().FirstOrDefault(q => q.EmployeeId == employeeId && q.Period == period&&q.LeaveTypeId==leaveTypeId);
             return rtnData;
         }
 

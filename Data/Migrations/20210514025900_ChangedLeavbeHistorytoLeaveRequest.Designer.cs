@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using leave_mgmnt.Data;
 
 namespace leave_mgmnt.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210514025900_ChangedLeavbeHistorytoLeaveRequest")]
+    partial class ChangedLeavbeHistorytoLeaveRequest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -266,14 +268,8 @@ namespace leave_mgmnt.Data.Migrations
                     b.Property<bool?>("Approved")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("Cancelled")
-                        .HasColumnType("bit");
-
                     b.Property<int>("LeaveTypeId")
                         .HasColumnType("int");
-
-                    b.Property<string>("RequestComments")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("approvedByid")
                         .HasColumnType("nvarchar(450)");
@@ -324,111 +320,6 @@ namespace leave_mgmnt.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("LeaveTypes");
-                });
-
-            modelBuilder.Entity("leave_mgmnt.Models.EmployeeVM", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("DateJoined")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateofBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TaxId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EmployeeVM");
-                });
-
-            modelBuilder.Entity("leave_mgmnt.Models.LeaveRequestVM", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool?>("Approved")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Cancelled")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("LeaveTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RequestComments")
-                        .HasColumnType("nvarchar(300)")
-                        .HasMaxLength(300);
-
-                    b.Property<string>("approvedByid")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("dateActioned")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("dateRequested")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("endDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("requestEmployeeid")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("startDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("LeaveTypeId");
-
-                    b.HasIndex("approvedByid");
-
-                    b.HasIndex("requestEmployeeid");
-
-                    b.ToTable("LeaveRequestVM");
-                });
-
-            modelBuilder.Entity("leave_mgmnt.Models.LeaveTypeVM", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime?>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DefaultDays")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LeaveTypeVM");
                 });
 
             modelBuilder.Entity("leave_mgmnt.Data.Employee", b =>
@@ -530,23 +421,6 @@ namespace leave_mgmnt.Data.Migrations
                         .HasForeignKey("approvedByid");
 
                     b.HasOne("leave_mgmnt.Data.Employee", "requestEmployee")
-                        .WithMany()
-                        .HasForeignKey("requestEmployeeid");
-                });
-
-            modelBuilder.Entity("leave_mgmnt.Models.LeaveRequestVM", b =>
-                {
-                    b.HasOne("leave_mgmnt.Models.LeaveTypeVM", "leaveType")
-                        .WithMany()
-                        .HasForeignKey("LeaveTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("leave_mgmnt.Models.EmployeeVM", "approvedBy")
-                        .WithMany()
-                        .HasForeignKey("approvedByid");
-
-                    b.HasOne("leave_mgmnt.Models.EmployeeVM", "requestEmployee")
                         .WithMany()
                         .HasForeignKey("requestEmployeeid");
                 });
