@@ -2,54 +2,71 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+   // Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Leave Requests</h1>
 
-<p>
+@*<p>
     <a asp-action="Create" class="btn btn-outline-success">Create New</a>
-</p>
+</p>*@
 <div class="row">
     <div class="col-md-3">
-
-        <div class="card" style="width: 18rem;">
-
-            <div class="card-body text-center">
-                <h1 class="card-title">@Model.totalRequests</h1>
-                <h5 class="card-text">@Html.DisplayNameFor(model => model.totalRequests)</h5>
+        <div class="info-box">
+            <span class="info-box-icon bg-info"><i class="fas fa-tachometer-alt"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-content">@Model.totalRequests</span>
+                <span class="info-box-number">@Html.DisplayNameFor(model => model.totalRequests)</span>
+               
             </div>
         </div>
+
+            </div>
+
+    <div class="col-md-3">
+
+        <div class="info-box">
+            <span class="info-box-icon bg-secondary"><i class="fas fa-exclamation-circle"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-content">@Model.pendingRequests</span>
+                <span class="info-box-number">@Html.DisplayNameFor(model => model.pendingRequests)</span>
+
+            </div>
+        </div>
+
+
+        
     </div>
 
     <div class="col-md-3">
-        <div class="card" style="width: 18rem;">
 
-            <div class="card-body text-center">
-                <h1 class="card-title text-info">@Model.pendingRequests</h1>
-                <h5 class="card-text">@Html.DisplayNameFor(model => model.pendingRequests)</h5>
+        <div class="info-box">
+            <span class="info-box-icon bg-success"><i class="fas fa-check-circle"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-content">@Model.approvedRequests</span>
+                <span class="info-box-number">@Html.DisplayNameFor(model => model.approvedRequests)</span>
+
             </div>
         </div>
+
+
+        
     </div>
 
     <div class="col-md-3">
-        <div class="card" style="width: 18rem;">
 
-            <div class="card-body text-center">
-                <h1 class="card-title text-success">@Model.approvedRequests</h1>
-                <h5 class="card-text">@Html.DisplayNameFor(model => model.approvedRequests)</h5>
+
+        <div class="info-box">
+            <span class="info-box-icon bg-danger"><i class="fas fa-window-close"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-content">@Model.rejectedeRequests</span>
+                <span class="info-box-number">@Html.DisplayNameFor(model => model.rejectedeRequests)</span>
+
             </div>
         </div>
-    </div>
 
-    <div class="col-md-3">
-        <div class="card" style="width: 18rem;">
 
-            <div class="card-body text-center">
-                <h1 class="card-title text-danger">@Model.rejectedeRequests</h1>
-                <h5 class="card-text">@Html.DisplayNameFor(model => model.rejectedeRequests)</h5>
-            </div>
-        </div>
+        
 
     </div>
 </div>
